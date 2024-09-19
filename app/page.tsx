@@ -1,101 +1,136 @@
 import Image from "next/image";
+import DevKit from "@/public/image.png"; // Ensure you replace this with the actual image path
+import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { format } from "date-fns";
+import DevKitLogo from "@/public/logo/favicon.ico";
+import Link from "next/link";
+
+const socialLinks = [
+  {
+    name: "GitHub",
+    href: "https://github.com/leelasaiprasanth",
+    icon: <FaGithub />,
+  },
+  {
+    name: "Twitter",
+    href: "https://x.com/leelasaiprasant",
+    icon: <FaTwitter />,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/leelasaiprasanth/",
+    icon: <FaLinkedin />,
+  },
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const lastEditedDate = format(new Date(), "MMMM dd, yyyy");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <>
+      <main className="relative isolate h-screen w-screen overflow-hidden">
+        {/* Background Pattern */}
+        <svg
+          className="absolute inset-0 -z-10 w-full h-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+          aria-hidden="true"
+        >
+          <defs>
+            <pattern
+              id="pattern"
+              width={200}
+              height={200}
+              patternUnits="userSpaceOnUse"
+            >
+              <path d="M.5 200V.5H200" fill="none" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#pattern)" />
+        </svg>
+
+        {/* Blurred Gradient */}
+        <div
+          className="absolute inset-0 -z-20 flex justify-center overflow-hidden blur-3xl"
+          aria-hidden="true"
+        >
+          <div
+            className="w-[69.25rem] bg-gradient-to-r from-[#5e5e5e14] to-[#ffffff4f] opacity-20"
+            style={{
+              clipPath:
+                "polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)",
+            }}
+          />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 mx-auto max-w-7xl px-6 pb-6 pt-10 lg:flex lg:px-4 lg:pt-20 space-y-6">
+          <div className="flex flex-col items-start space-y-6 p-4 max-w-8xl mx-auto">
+            <Image src={DevKitLogo} width={40} height={40} alt="Icon" />
+            <h1 className="text-5xl font-bold text-white">DevKit</h1>
+            <h3 className="text-3xl font-bold text-white">
+              Essential tools for Developers.
+              <p className="text-lg text-gray-400 mt-2 max-w-lg">
+                A toolkit for miscellaneous tools at a glance.
+              </p>
+            </h3>
+            <p className="text-base text-gray-500 mt-2 max-w-lg">
+              Get access to 5+ tools including QR Code generator, JSON
+              validator, time converter, regex matcher, YouTube URL checker, and
+              more.
+            </p>
+            <Link
+              href="/tools"
+              className="rounded-md bg-indigo-500 px-4 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+            >
+              DevKit 🚀
+            </Link>
+          </div>
+
+          <div className="relative mx-auto mt-16 flex max-w-1xl shadow-lg">
+            <div className="relative flex-none max-w-2xl">
+              <Image
+                src={DevKit}
+                alt="App screenshot"
+                width={1280}
+                height={720}
+                className="hidden lg:block w-[76rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
+              />
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-transparent opacity-50" />
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer
+        aria-labelledby="footer-heading"
+        className="absolute bottom-0 w-full text-white"
+      >
+        <h2 id="footer-heading" className="sr-only">
+          Footer
+        </h2>
+        <div className="mx-auto max-w-7xl px-6 pb-8 pt-4 lg:px-8">
+          <div className="flex flex-row items-center justify-between border-t border-white/10 pt-8">
+            <p className="text-xs leading-5 text-gray-400">
+              📅 {lastEditedDate}
+            </p>
+            <div className="flex space-x-6">
+              {socialLinks.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-gray-400"
+                  aria-label={item.name}
+                >
+                  {item.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </footer>
-    </div>
+    </>
   );
 }
