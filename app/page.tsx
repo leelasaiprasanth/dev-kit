@@ -1,27 +1,9 @@
-import Image from "next/image";
-import DevKit from "@/public/image.png"; // Ensure you replace this with the actual image path
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
-import { format } from "date-fns";
+import ConnectLinks from "@/app/_utils/ConnectionLinks";
+import DevKit from "@/public/image.png";
 import DevKitLogo from "@/public/logo/favicon.ico";
+import { format } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
-
-const socialLinks = [
-  {
-    name: "GitHub",
-    href: "https://github.com/leelasaiprasanth",
-    icon: <FaGithub />,
-  },
-  {
-    name: "Twitter",
-    href: "https://x.com/leelasaiprasant",
-    icon: <FaTwitter />,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://www.linkedin.com/in/leelasaiprasanth/",
-    icon: <FaLinkedin />,
-  },
-];
 
 export default function Home() {
   const lastEditedDate = format(new Date(), "MMMM dd, yyyy");
@@ -48,7 +30,7 @@ export default function Home() {
         </svg>
 
         {/* Blurred Gradient */}
-        <div
+        {/* <div
           className="absolute inset-0 -z-20 flex justify-center overflow-hidden blur-3xl"
           aria-hidden="true"
         >
@@ -59,7 +41,7 @@ export default function Home() {
                 "polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)",
             }}
           />
-        </div>
+        </div> */}
 
         {/* Content */}
         <div className="relative z-10 mx-auto max-w-7xl px-6 pb-6 pt-10 lg:flex lg:px-4 lg:pt-20 space-y-6">
@@ -79,7 +61,7 @@ export default function Home() {
             </p>
             <Link
               href="/tools"
-              className="rounded-md bg-indigo-500 px-4 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+              className="rounded-md bg-purple-700 px-4 py-2 text-lg font-semibold text-white shadow-sm hover:bg-purple-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-900"
             >
               DevKit 🚀
             </Link>
@@ -114,18 +96,11 @@ export default function Home() {
             <p className="text-xs leading-5 text-gray-400">
               📅 {lastEditedDate}
             </p>
-            <div className="flex space-x-6">
-              {socialLinks.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-500 hover:text-gray-400"
-                  aria-label={item.name}
-                >
-                  {item.icon}
-                </a>
+            <div className="flex space-x-4">
+              {ConnectLinks.map((link) => (
+                <Link key={link.label} href={link.href}>
+                  {link.icon}
+                </Link>
               ))}
             </div>
           </div>

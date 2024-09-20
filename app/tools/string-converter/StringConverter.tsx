@@ -1,0 +1,138 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import TextArea from "@/app/_components/TextArea";
+
+const convertToSnakeCase = (input: string): string =>
+  input
+    .replace(/\s+/g, "_") // Replace spaces with underscores
+    .replace(/([a-z])([A-Z])/g, "$1_$2")
+    .toLowerCase();
+
+const convertToCamelCase = (input: string): string =>
+  input
+    .replace(/[\s_-]+./g, (match) =>
+      match.charAt(match.length - 1).toUpperCase()
+    )
+    .replace(/^[A-Z]/, (match) => match.toLowerCase());
+
+const convertToKebabCase = (input: string): string =>
+  input
+    .replace(/[\s_-]/g, "-")
+    .replace(/([a-z])([A-Z])/g, "$1-$2")
+    .toLowerCase();
+
+const convertToPascalCase = (input: string): string => {
+  const camelCase = convertToCamelCase(input);
+  const firstChar = camelCase.charAt(0).toUpperCase();
+  return firstChar + camelCase.slice(1);
+};
+
+const convertToUpperCase = (input: string): string => input.toUpperCase();
+
+const convertToScreamKebabCase = (input: string): string =>
+  convertToKebabCase(input).toUpperCase();
+
+const convertToConstantCase = (input: string): string =>
+  convertToSnakeCase(input).toUpperCase();
+
+enum TransformationOption {
+  camelCase = "camelCase",
+  snakeCase = "snakeCase",
+  kebabCase = "kebabCase",
+  pascalCase = "pascaleCase",
+  upperCase = "upperCase",
+  screamKebab = "screamKebabCase",
+  constantCase = "constantCase",
+}
+
+const options = [
+  {
+    label: "camelCase",
+    value: TransformationOption.camelCase,
+  },
+  {
+    label: "snake_case",
+    value: TransformationOption.snakeCase,
+  },
+  {
+    label: "kebab-case",
+    value: TransformationOption.kebabCase,
+  },
+  {
+    label: "PascalCase",
+    value: TransformationOption.pascalCase,
+  },
+  {
+    label: "UPPER CASE",
+    value: TransformationOption.upperCase,
+  },
+  {
+    label: "SCREAM-KEBAB",
+    value: TransformationOption.screamKebab,
+  },
+  {
+    label: "CONSTANTS_CASE",
+    value: TransformationOption.constantCase,
+  },
+];
+export default function StringConverter() {
+  const [transformationOption, setTransformationOption] =
+    useState<TransformationOption>(options[0].value);
+  const [input, setInput] = useState("");
+  const [output, setOutput] = useState("");
+  const transformText = (text: string) => {
+    switch (transformationOption) {
+      case TransformationOption.camelCase:
+        return convertToCamelCase(text);
+      case TransformationOption.snakeCase:
+        return convertToSnakeCase(text);
+      case TransformationOption.kebabCase:
+        return convertToKebabCase(text);
+      case TransformationOption.pascalCase:
+        return convertToPascalCase(text);
+      case TransformationOption.upperCase:
+        return convertToUpperCase(text);
+      case TransformationOption.screamKebab:
+        return convertToScreamKebabCase(text);
+      case TransformationOption.constantCase:
+        return convertToConstantCase(text);
+      default:
+        break;
+    }
+    return text;
+  };
+  return (
+    <div className="w-full h-full flex gap-4">
+      <TextArea
+        initialInput="snake_case_to_camel_case"
+        onInputChange={(input) => {
+          setInput(input);
+          setOutput(transformText(input));
+        }}
+      />
+      <div className="w-full h-full">
+        <div className="flex items-center mb-4 gap-4 justify-between">
+          <p className="font-bold text-xl"> Output: </p>
+          <button
+            type="button"
+            className="rounded-md bg-purple-700 px-4 py-2 text-lg font-semibold text-white shadow-sm hover:bg-purple-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-900"
+            onClick={async () => {
+              await navigator.clipboard.writeText(output);
+            }}
+          >
+            Copy
+          </button>
+        </div>
+        <textarea
+          readOnly
+          className="px-8 py-2 block w-full rounded-lg border-0
+        bg-zinc-950 text-white shadow-sm ring-1 ring-inset
+        ring-gray-300"
+          style={{ height: "calc(100% - 44px)" }}
+          value={output}
+        />
+      </div>
+    </div>
+  );
+}
