@@ -1,10 +1,4 @@
-import {
-  FaYoutube,
-  FaGithub,
-  FaInstagram,
-  FaLinkedin,
-  FaDiscord,
-} from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
 interface ConnectLink {

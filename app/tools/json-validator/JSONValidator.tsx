@@ -1,17 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import TextArea from "@/app/_components/TextArea";
 
-import React from "react";
-
 const JSONValidator = () => {
-  const [output, setOutput] = useState("");
   return (
     <div className="w-full h-full flex gap-4">
       <TextArea
         initialInput={initialInput}
-        onInputChange={(input) => setOutput(input)}
+        onInputChange={() => {
+          // setOutput(input);
+        }}
       />
     </div>
   );

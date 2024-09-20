@@ -6,11 +6,7 @@ import { useState } from "react";
 
 import { Button } from "../_components/Button";
 
-import {
-  RiMenuSearchFill as Menu,
-  RiCloseLine as X,
-  RiHome5Line as Home,
-} from "react-icons/ri";
+import { RiMenuSearchFill as Menu, RiCloseLine as X } from "react-icons/ri";
 
 import { FaGithub } from "react-icons/fa";
 
@@ -20,14 +16,13 @@ export default function ToolsLayout({
   children: React.ReactNode;
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState("");
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const handleItemClick = (id: string) => {
-    setSelectedItem(id);
-    setIsMenuOpen(false);
-  };
+  // const handleItemClick = (id: string) => {
+  //   setSelectedItem(id);
+  //   setIsMenuOpen(false);
+  // };
 
   return (
     <>
